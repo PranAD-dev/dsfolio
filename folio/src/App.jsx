@@ -24,11 +24,8 @@ function CameraLogger(){
 }
 
 function App() {
+  const [allFly, setAllFly] = useState(false)
 
-  
-  
-
-  
   return (
     <div className="canvas-container">
       <Canvas camera = {{
@@ -37,47 +34,18 @@ function App() {
         near: 0.1,
         far: 1000,
       }}>
-        <CameraLogger />
-        {/* <CameraLogger /> */} 
+        {/* <CameraLogger /> */}
+        {/* <CameraLogger /> */}
         <Environment preset="studio" />
         <Stadium position = {[0, 0, 0]} />
-        <Model position = {[-2,0,10]}  />
-        <Model position = {[-2,0,10]}  />
-        <Model position = {[-2,0,10]}  />
-        <Model position = {[-2,0,10]}  />
-        <Model position = {[-2,0,10]}  />
-        <Model position = {[0,0,0]}  />
-        <Model position = {[0,0,0]}  />
-        <Model position = {[0,0,0]}  />
-        <Model position = {[-8,0,-10]}  />
-        <Model position = {[-8,0,-10]}  />
-        <Model position = {[-8,0,-10]}  />
-        <Model position = {[-8,0,-10]}  />
-        <Model position = {[-8,0,-10]}  />
-        <Model position = {[-8,0,-10]}  />
-        <Model position = {[-8,0,-10]}  />
-        <Model position = {[-9,0,10]}  />
-        <Model position = {[-9,0,10]}  />
-        <Model position = {[-9,0,10]}  />
-        <Model position = {[-9,0,10]}  />
-        <Model position = {[-9,0,10]}  />
-        <Model position = {[-9,0,10]}  />
-        <Model position = {[0,0,0]}  />
-        <Model position = {[15,0,-10]} /> 
-        <Model position = {[15,0,-10]} /> 
-        <Model position = {[15,0,-10]} /> 
-        <Model position = {[15,0,-10]} /> 
-        <Model position = {[15,0,-10]} /> 
-        <Model position = {[10,0,0]} />
-        <Model position = {[10,0,0]} />
-        <Model position = {[10,0,0]} />
-        <Model position = {[10,0,10]} />
-        <Model position = {[10,0,10]} />
-        <Model position = {[10,0,10]} />
-        <Model position = {[10,0,10]} />
-        <Model position = {[10,0,10]} />
-        <Model position = {[10,0,10]} />
-        <Model position = {[10,0,0]} />
+        <Model position = {[-2,0,10]} fly={allFly} onBallClick={() => setAllFly(true)} />
+        <Model position = {[-8,0,-10]} fly={allFly} onBallClick={() => setAllFly(true)} />
+        <Model position = {[-9,0,10]} fly={allFly} onBallClick={() => setAllFly(true)} />
+        <Model position = {[0,0,0]} fly={allFly} onBallClick={() => setAllFly(true)} />
+        <Model position = {[15,0,-10]} fly={allFly} onBallClick={() => setAllFly(true)} />
+        <Model position = {[10,0,0]} fly={allFly} onBallClick={() => setAllFly(true)} />
+        <Model position = {[10,0,10]} fly={allFly} onBallClick={() => setAllFly(true)} />
+
         <OrbitControls />
       </Canvas>
     </div>
