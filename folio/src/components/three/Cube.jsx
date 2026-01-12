@@ -7,7 +7,7 @@ export default function Cube(props) {
 
     // state variables for interactive cube
     const [hovered, setHover] = useState(false)
-    const [visible, setVisible] = useState(true)
+    const [fly, setFly] = useState(false)
     
     // useFrame helps renderin the mesh componenet every frame
     useFrame((state,delta)=>{
@@ -22,7 +22,7 @@ export default function Cube(props) {
         <mesh 
             {...props}
             ref = {meshRef}
-            scale = {2}
+            scale = {4}
             onClick = {(e) => setVisible(false)}
             onPointerOver = {(e) => setHover(true)}
             onPointerOut = {(e) => setHover(false)}>
