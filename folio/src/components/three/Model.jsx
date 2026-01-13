@@ -1,29 +1,40 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, Html } from '@react-three/drei'
 import * as THREE from 'three'
 
 export default function Model({ fly, onBallClick, ...props }) {
   const meshRef = useRef()
   const { scene } = useGLTF('/models/ball.glb')
   const clonedScene = useMemo(() => scene.clone(true), [scene])
-
+  const [showVideo, setShowVideo] = useState(false)  
   const target = useMemo(
-    () => new THREE.Vector3(-261.0876, 110.3974, 250.8670),
+    () => new THREE.Vector3(-50, 25, 55),
     []
   )
+  const handleEnd = () => {
+    setShowVideo(false)
+    // navigation here
+  }
 
-  useFrame((_, delta) => {
+  useFrame(() => {
     if (!fly || !meshRef.current) return
 
-    const speed = 0.1
+    const speed = 0.5
     meshRef.current.position.lerp(
       target,
-      1 - Math.exp(-speed * delta)
+      0.018
     )
+    if (meshRef.current.position.distanceTo(target) < 1){
+        onBallClick?.()
+        setShowVideo(true)
+
+  }
+
   })
 
-  return (
+    return (
+    <>
     <primitive
       {...props}
       ref={meshRef}
@@ -41,5 +52,25 @@ export default function Model({ fly, onBallClick, ...props }) {
         document.body.style.cursor = 'default'
       }}
     />
+    {showVideo && (
+        <div style ={{
+            position: 'fixed',
+            inset:0,
+            background: 'black',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 100
+        }}>
+            <video
+                src="#"
+                autoPlay
+                onEnded={handleEnd}
+                style={{maxWidth:'100%', maxHeight:'100%'}}
+                />
+        </div>
+
+    )}
+   </>
   )
 }
